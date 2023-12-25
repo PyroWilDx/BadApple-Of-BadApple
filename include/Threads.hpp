@@ -2,8 +2,8 @@
 // Created by pyrowildx on 20/12/23.
 //
 
-#ifndef BADAPPLE_TERMINALTHREADS_HPP
-#define BADAPPLE_TERMINALTHREADS_HPP
+#ifndef BADAPPLE_THREADS_HPP
+#define BADAPPLE_THREADS_HPP
 
 #include <vector>
 #include <string>
@@ -13,7 +13,7 @@
 
 #define MAX_BUFFER_SIZE 6
 
-class TerminalThreads {
+class Threads {
 
 public:
     static void productStrImg();
@@ -24,6 +24,7 @@ private:
     static bool videoEnded;
 
     static std::string strImgBuffer[MAX_BUFFER_SIZE];
+
     static std::mutex mtx;
     static std::condition_variable condProd;
     static std::condition_variable condCons;
@@ -31,13 +32,13 @@ private:
     static int iCons;
     static int nbReady;
 
-    static void startProductStrImg();
+    static void startProduct();
 
-    static void endProductStrImg();
+    static void endProduct();
 
-    static void startConsumeStrImg();
+    static void startConsume();
 
-    static void endConsumeStrImg();
+    static void endConsume();
 
 };
 

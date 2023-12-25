@@ -3,21 +3,21 @@
 //
 
 #include <iostream>
-#include "TerminalThreads.hpp"
-#include "Utils.hpp"
+#include "Threads.hpp"
 #include "BadApple.hpp"
 
-bool TerminalThreads::videoEnded = false;
+bool Threads::videoEnded = false;
 
-std::string TerminalThreads::strImgBuffer[MAX_BUFFER_SIZE] = {};
-std::condition_variable TerminalThreads::condProd;
-std::condition_variable TerminalThreads::condCons;
-int TerminalThreads::iProd = 0;
-int TerminalThreads::iCons = 0;
-int TerminalThreads::nbReady = 0;
-std::mutex TerminalThreads::mtx;
+std::string Threads::strImgBuffer[MAX_BUFFER_SIZE] = {};
 
-void TerminalThreads::productStrImg() {
+std::condition_variable Threads::condProd;
+std::condition_variable Threads::condCons;
+int Threads::iProd = 0;
+int Threads::iCons = 0;
+int Threads::nbReady = 0;
+std::mutex Threads::mtx;
+
+void Threads::productStrImg() {
     cv::Mat imgOrglBA;
     std::vector<cv::Mat> imgButBAList = std::vector<cv::Mat>(BadApple::nbVideo);
     while (true) {
@@ -26,28 +26,28 @@ void TerminalThreads::productStrImg() {
             break;
         }
 
-        startProductStrImg();
+        startProduct();
 
         BadApple::updateStrImg(imgOrglBA, strImgBuffer[iProd]);
 
-        endProductStrImg();
+        endProduct();
     }
 }
 
-void TerminalThreads::consumeStrImg() {
+void Threads::consumeStrImg() {
     while (true) {
-        if(nbReady == 0 && videoEnded) break;
+        if (nbReady == 0 && videoEnded) break;
 
-        startConsumeStrImg();
+        startConsume();
 
         BadApple::displayStrImg(strImgBuffer[iCons]);
         strImgBuffer[iCons] = "";
 
-        endConsumeStrImg();
+        endConsume();
     }
 }
 
-void TerminalThreads::startProductStrImg() {
+void Threads::startProduct() {
     std::unique_lock<std::mutex> lock(mtx);
     while (nbReady >= MAX_BUFFER_SIZE) {
         condProd.wait(lock);
@@ -56,7 +56,7 @@ void TerminalThreads::startProductStrImg() {
     mtx.unlock();
 }
 
-void TerminalThreads::endProductStrImg() {
+void Threads::endProduct() {
     std::unique_lock<std::mutex> lock(mtx);
     nbReady++;
     iProd = (iProd + 1) % MAX_BUFFER_SIZE;
@@ -64,7 +64,7 @@ void TerminalThreads::endProductStrImg() {
     mtx.unlock();
 }
 
-void TerminalThreads::startConsumeStrImg() {
+void Threads::startConsume() {
     std::unique_lock<std::mutex> lock(mtx);
     while (nbReady < 1) {
         condCons.wait(lock);
@@ -73,7 +73,7 @@ void TerminalThreads::startConsumeStrImg() {
     mtx.unlock();
 }
 
-void TerminalThreads::endConsumeStrImg() {
+void Threads::endConsume() {
     std::unique_lock<std::mutex> lock(mtx);
     nbReady--;
     iCons = (iCons + 1) % MAX_BUFFER_SIZE;
