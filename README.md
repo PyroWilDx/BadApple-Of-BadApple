@@ -1,11 +1,39 @@
-# Bad Apple
+# BadApple!!-Of-BadApple!!
 
-## Description
+[**BadApple!!-Of-BadApple!!**](https://github.com/PyroWilDx/BadApple-Of-BadApple/) is a tool that generates videos composed of various [Bad Apple!! but...](https://knowyourmeme.com/memes/bad-apple) videos, arranged using a [QuadTree](https://en.wikipedia.org/wiki/Quadtree) structure. Each segment of a video is randomly filled with different [Bad Apple!! but...](https://knowyourmeme.com/memes/bad-apple) variations.
 
-Data Structure &ndash; QuadTree.
+> [!NOTE]
+> - [Bad Apple!! but It's Made of Random "Bad Apple!! but..." Videos](https://youtu.be/Lv5BqYe_Fdo)
+> - [Bad Apple!! but Every Pixel is a Random "Bad Apple!! but..." Video](https://youtu.be/TzOjLlV2Yak)
 
-Bad Apple!! but It's Made of Random "Bad Apple!! but..." Videos &ndash; [https://youtu.be/Lv5BqYe_Fdo](https://youtu.be/Lv5BqYe_Fdo).
+<img src="yt/Thumb.png">
 
-Bad Apple!! but Every Pixel is a Random "Bad Apple!! but..." Video &ndash; [https://youtu.be/TzOjLlV2Yak](https://youtu.be/TzOjLlV2Yak).
+## Development Set-Up
 
-![Thumbnail](youtube/Thumbnail.png)
+<div align="center">
+
+[<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" width="60"/>](https://isocpp.org/)
+&nbsp;&nbsp;&nbsp;&nbsp;
+[<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/clion/clion-original.svg" width="60"/>](https://www.jetbrains.com/clion/)
+&nbsp;&nbsp;&nbsp;&nbsp;
+[<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" width="60"/>](https://www.linux.org/)
+
+[OpenCV](https://opencv.org/)
+
+</div>
+
+### How To Use
+
+- Compile w/ CLion.
+
+- Run ```BadApple```.
+
+```
+./BadApple <Width> <Height> X 1
+```
+
+---
+
+<div align="center">
+  Copyright &#169; 2024 PyroWilDx. All Rights Reserved.
+</div>
