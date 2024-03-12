@@ -4,7 +4,6 @@
 #include <filesystem>
 #include <thread>
 #include <opencv2/opencv.hpp>
-#include <SFML/Audio.hpp>
 #include "Utils.hpp"
 #include "Threads.hpp"
 #include "BadApple.hpp"
@@ -32,13 +31,6 @@ int main(int argc, char *argv[]) {
     bool multiThreading = (value == 2);
 
     BadApple::initBadApple();
-
-    sf::Music music;
-    if (terminalMode) {
-        bool musicOpened = music.openFromFile("res/BadApple.ogg");
-        Utils::myAssert(musicOpened, "Failed to open music.");
-        music.play();
-    }
 
     cv::VideoWriter generatedVideo;
 #ifndef ALPHA
@@ -130,11 +122,9 @@ int main(int argc, char *argv[]) {
 
         if (terminalMode) {
             if (cv::waitKey(30) == 27) {
-                music.pause();
                 while (true) {
                     if (cv::waitKey(30) == 27) break;
                 }
-                music.play();
             }
         } else {
             if (cv::waitKey(WAIT_TIME) == 27 || spaced) {
